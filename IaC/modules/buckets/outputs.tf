@@ -15,18 +15,12 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program; if not, write to the Free Software Foundation,
 # Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-variable "project_id" {
-  type = string
+output "url" {
+  description = "gcs uri"
+  value       = google_storage_bucket.this.url
 }
-variable "app_id" {
-  type = string
-}
-variable "mlflow_service" {
-  type = string
-}
-variable "artifacts_bucket" {
-  type = string
-}
-variable "training_bucket" {
-  type = string
+
+output "name" {
+  description = "gcs bucket name"
+  value       = google_storage_bucket.this.name
 }

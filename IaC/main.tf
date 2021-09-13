@@ -41,6 +41,12 @@ module "network" {
   network_name = var.network_name
 }
 
+module "buckets" {
+  source            = "./modules/buckets"
+  training_bucket_name       = "${var.project_id}-training-data"
+  
+}
+
 module "mlflow" {
   source                       = "./modules/mlflow"
   mlflow_server                = var.mlflow_server
@@ -63,5 +69,6 @@ module "log_pusher" {
   app_id           = module.mlflow.app_id
   mlflow_service   = module.mlflow.mlflow_service
   artifacts_bucket = module.mlflow.artifacts_bucket_name
+  training_bucket  = module.buckets.name
   project_id       = var.project_id
 }

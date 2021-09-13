@@ -15,18 +15,20 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program; if not, write to the Free Software Foundation,
 # Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-variable "project_id" {
-  type = string
-}
-variable "app_id" {
-  type = string
-}
-variable "mlflow_service" {
-  type = string
-}
-variable "artifacts_bucket" {
-  type = string
-}
-variable "training_bucket" {
-  type = string
+resource "google_storage_bucket" "this" {
+  name          = var.training_bucket_name
+  storage_class = var.storage_class
+  versioning {
+    enabled = var.versioning_enabled
+  }
+  lifecycle_rule {
+    condition {
+      num_newer_versions = var.training_number_of_version
+    }
+    action {
+      type = "Delete"
+    }
+  }
+  uniform_bucket_level_access = var.storage_uniform
+  force_destroy               = true
 }

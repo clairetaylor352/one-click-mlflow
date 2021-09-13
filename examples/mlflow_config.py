@@ -51,15 +51,18 @@ def _get_client_id(service_uri):
     query_string = six.moves.urllib.parse.parse_qs(parsed.query)
     return query_string["client_id"][0]
 
-
-PROJECT_ID = input("Enter your project ID: ")
-EXPERIMENT_NAME = input("Enter the name of your MLFlow experiment: ")
+if not "PROJECT_ID" in os.environ:
+    PROJECT_ID = input("Enter your project ID: ")
+if not "EXPERIMENT_ID" in os.environ:
+    EXPERIMENT_NAME = input("Enter the name of your MLFlow experiment: ")
 
 # If mlflow if not deployed on the default app engine service, change it with the url of your service <!-- omit in toc -->
 tracking_uri = f"https://mlflow-dot-{PROJECT_ID}.ew.r.appspot.com"
 
 os.environ["MLFLOW_TRACKING_TOKEN"] = get_token()
-
+os.environ["PROJECT_ID"] = PROJECT_ID
+os.environ["EXPERIMENT_NAME"] = EXPERIMENT_NAME
+os.environ["TRACKING_URI"] = tracking_uri
 set_tracking_uri(tracking_uri)
 print(f"Tracking uri set to {tracking_uri}")
 set_experiment(EXPERIMENT_NAME)

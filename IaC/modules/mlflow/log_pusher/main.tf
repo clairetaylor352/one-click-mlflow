@@ -33,3 +33,15 @@ resource "google_storage_bucket_iam_member" "log_pusher_storage" {
   role   = "roles/storage.objectAdmin"
   member = "serviceAccount:${google_service_account.log_pusher.email}"
 }
+
+resource "google_storage_bucket_iam_member" "log_pusher_training_data" {
+  bucket = var.training_bucket
+  role   = "roles/storage.admin"
+  member = "serviceAccount:${google_service_account.log_pusher.email}"
+}
+
+resource "google_project_iam_member" "ai_platform" {
+    project = var.project_id
+    member = "serviceAccount:${google_service_account.log_pusher.email}"
+    role = "roles/ml.developer"
+}

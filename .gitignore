@@ -11,3 +11,9 @@ secrets/
 
 #python
 */__pycache__/
+
+examples/venv/*
+.vscode/*
+*.ipynb_checkpoints*
+*.pyc
+examples/mlflow-log-pusher-key.json

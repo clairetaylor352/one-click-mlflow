@@ -39,7 +39,8 @@ module "services" {
     "sqladmin.googleapis.com",
     "secretmanager.googleapis.com",
     "iap.googleapis.com",
-    "cloudbuild.googleapis.com"
+    "cloudbuild.googleapis.com",
+    "ml.googleapis.com"
   ]
 }
 
